@@ -14,4 +14,5 @@ ifeq (,$(OUTLIB_DIR))
   $(error Must precise OUTLIB_DIR)
 endif
 
+include ext/makefile.mk
 include src/makefile.mk

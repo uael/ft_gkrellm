@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cc                                            :+:      :+:    :+:   */
+/*   DisplayModule/ImgUI.cc                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alucas- <alucas-@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,19 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "DisplayModule/ImgUI.h"
+#include "ImgUI.h"
 
-#include <iostream>
+ImgUI::ImgUI(std::vector<IMonitorModule> const &modules)
+	: IMonitorDisplay(modules) {
 
-int main() {
-	std::vector<IMonitorModule> modules = std::vector<IMonitorModule>();
-	ImgUI display(modules);
+}
 
-	if (display.init())
-		return 1;
-	if (display.show())
-		return 1;
-	if (display.exit())
-		return 1;
+ImgUI::~ImgUI() {
+
+}
+
+int ImgUI::init() {
+	return IMonitorDisplay::init();
+}
+
+int ImgUI::exit() {
+	return IMonitorDisplay::exit();
+}
+
+int ImgUI::show() {
 	return 0;
+}
+
+int ImgUI::draw(const char *fmt, ...) {
+	return IMonitorDisplay::draw(fmt);
+}
+
+int ImgUI::plot(const float *values, size_t nvalues) {
+	return IMonitorDisplay::plot(values, nvalues);
 }

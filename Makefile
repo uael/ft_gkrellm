@@ -96,6 +96,12 @@ $(BUILD_PATH)/%.o: %.cc $(MAKE_DEPS)
 	$(V)$(CXX) $< -c $(CFLAGS) $(addprefix -I,$(INCLUDE)) \
 	  $(addprefix -D,$(DEFINE)) -MMD -MF $(@:.o=.d) -o $@
 
+$(BUILD_PATH)/%.o: %.cpp $(MAKE_DEPS)
+	@mkdir -p $(dir $@)
+	@echo "  CXX     $(notdir $<)"
+	$(V)$(CXX) $< -c $(CFLAGS) $(addprefix -I,$(INCLUDE)) \
+	  $(addprefix -D,$(DEFINE)) -MMD -MF $(@:.o=.d) -o $@
+
 $(TARGET_LIB): | $(DEPS) $(MAKE_DEPS)
 	@mkdir -p $(dir $@)
 	@echo "  AR      $(notdir $@)"
