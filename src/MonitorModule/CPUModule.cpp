@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 13:17:44 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/01/19 13:54:42 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/01/19 14:04:09 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,51 +38,39 @@ CPUModule     &CPUModule::operator=(CPUModule const & src)
 	return *this;
 }
 
-
-int		CPUModule::getAvailableCPU(void) const
+//TODO : make a function that take a string and return buf
+std::string		CPUModule::getAvailableCPU(void) const
 {
-	int mib[4];
-	int numCPU;
-	std::size_t len = sizeof(numCPU); 
+	char buf[100];
+	size_t buflen = 100;
 
-	mib[0] = CTL_HW;
-	mib[1] = HW_NCPU;
-	sysctl(mib, 2, &numCPU, &len, NULL, 0);
-	return numCPU;
+	sysctlbyname("hw.physicalcpu", &buf, &buflen, NULL, 0);
+	return buf;
 }
 
-int		CPUModule::getCPUNumber(void) const
+std::string		CPUModule::getCPUNumber(void) const
 {
-	int mib[4];
-	int numCPU;
-	std::size_t len = sizeof(numCPU); 
+	char buf[100];
+	size_t buflen = 100;
 
-	/* set the mib for hw.ncpu */
-	mib[0] = CTL_HW;
-	mib[1] = HW_AVAILCPU;  // alternatively, try HW_NCPU;
-	/* get the number of CPUs from the system */
-	sysctl(mib, 2, &numCPU, &len, NULL, 0);
-	return numCPU;
+	sysctlbyname("hw.physicalcpu_max", &buf, &buflen, NULL, 0);
+	return std::string(buf);
 }
 
-int		CPUModule::getCPUFrequ(void) const
+std::string		CPUModule::getCPUFrequ(void) const
 {
+	char buf[100];
+	size_t buflen = 100;
 
-	int mib[4];
-	int freq;
-	std::size_t len = sizeof(freq); 
-
-	mib[0] = CTL_HW;
-	mib[1] = HW_CPU_FREQ;
-	sysctl(mib, 2, &freq, &len, NULL, 0);
-	return freq;
+	sysctlbyname("hw.cpufrequency", &buf, &buflen, NULL, 0);
+	return std::string(buf);
 }
 
 std::string CPUModule::getCPUName(void) const
 {
 	char buf[100];
 	size_t buflen = 100;
-		sysctlbyname("machdep.cpu.brand_string", &buf, &buflen, NULL, 0);
+	sysctlbyname("machdep.cpu.brand_string", &buf, &buflen, NULL, 0);
 
-		return buf;
+	return buf;
 }

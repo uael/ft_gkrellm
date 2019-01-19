@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 13:17:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/01/19 13:54:40 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/01/19 14:02:15 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ class 					CPUModule
 		CPUModule(std::string name);
 		CPUModule(CPUModule const &src);
 		CPUModule 		&operator=(CPUModule const & src);
-		int		getCPUFrequ(void) const;
-		int		getCPUNumber(void) const;
-		int		getAvailableCPU(void) const;
+		std::string		getCPUFrequ(void) const;
+		std::string		getCPUNumber(void) const;
+		std::string		getAvailableCPU(void) const;
 		std::string getCPUName(void) const;
 
 	private:
