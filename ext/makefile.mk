@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 
 IMGUI_DIR = ext/imgui.git
-$(IMGUI_DIR): CLONE_URL = https://github.com/ocornut/imgui.git
+$(IMGUI_DIR): CLONE_URL = https://github.com/uael/imgui.git
 $(IMGUI_DIR): CLONE_TAG = master
 
 IMGUI_INCLUDE := $(IMGUI_DIR) $(IMGUI_DIR)/examples
