@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 14:22:38 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/01/19 14:41:30 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/01/19 14:48:54 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ float RAMModule::GetSystemMemoryUsagePercentage() const
 		}
 		pclose(fpIn);
 
+std::cout << "Pages Used" << pagesUsed << std::endl;
 		if (totalPages > 0.0) return (float) (pagesUsed/totalPages);
 	}
 	return -1.0f;  // indicate failure
