@@ -41,9 +41,13 @@ int IMonitorDisplay::show() {
 	throw std::logic_error("Function not yet implemented");
 }
 
-int IMonitorDisplay::draw(int line, int column, const char *fmt, ...) {
-	(void)line;
-	(void)column;
+int IMonitorDisplay::draw(const char *fmt, ...) {
 	(void)fmt;
+	throw std::logic_error("Function not yet implemented");
+}
+
+int IMonitorDisplay::plot(const float *values, size_t nvalues) {
+	(void)values;
+	(void)nvalues;
 	throw std::logic_error("Function not yet implemented");
 }
