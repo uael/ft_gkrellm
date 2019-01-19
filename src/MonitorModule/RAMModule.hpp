@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   RAMModule.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/19 14:15:56 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/01/19 14:42:18 by ygarrot          ###   ########.fr       */
+/*   Created: 2019/01/19 14:40:09 by ygarrot           #+#    #+#             */
+/*   Updated: 2019/01/19 14:41:32 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "CPUModule.hpp"
-#include "RAMModule.hpp"
-#include <unistd.h>
+#ifndef RAMMODULE_HPP
+#define RAMMODULE_HPP
 
-int main(void)
+#include <iostream>
+
+class 					RAMModule
 {
-	CPUModule cpu;
-	RAMModule ram;
+	public:
+		~RAMModule(void);
+		RAMModule(void);
+		RAMModule(std::string name);
+		RAMModule(RAMModule const &src);
+		RAMModule 		&operator=(RAMModule const & src);
+		float GetSystemMemoryUsagePercentage() const;
 
-	while (true)
-	{
-		std::cout << "CPU: " << static_cast<float>(cpu.GetCPULoad()) << std::endl;
-		std::cout << "RAM: " << static_cast<float>(ram.GetSystemMemoryUsagePercentage()) << std::endl;
-		getchar();
-	}
-}
+	private:
+};
+/* std::ostream 		&operator<<(std::ostream & o, RAMModule const & src); */
+
+#endif
+
+
+
