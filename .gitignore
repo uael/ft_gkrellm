@@ -48,3 +48,6 @@ compile_commands.json
 #vim
 *.swp
 *.swo
+
+#imgui
+imgui.ini
