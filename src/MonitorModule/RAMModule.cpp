@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 14:22:38 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/01/19 14:41:30 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/01/19 17:54:25 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@ RAMModule     &RAMModule::operator=(RAMModule const & src)
 	return *this;
 }
 
+std::string RAMModule::getTotalRam(void)
+{
+	uint64_t ram = 0;
+	    size_t size = sizeof(ram);
+
+	sysctlbyname("hw.cachesize", &ram, &size, NULL, 0);
+	return std::to_string(ram);
+}
+
 static double ParseMemValue(const char * b)
 {
 	while((*b)&&(isdigit(*b) == false)) b++;
@@ -56,6 +65,7 @@ float RAMModule::GetSystemMemoryUsagePercentage() const
 		{
 			if (strncmp(buf, "Pages", 5) == 0)
 			{
+				/* std::cout << buf << std::endl; */
 				double val = ParseMemValue(buf);
 				if (val >= 0.0)
 				{

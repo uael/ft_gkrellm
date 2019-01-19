@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 13:17:44 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/01/19 14:18:52 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/01/19 17:58:56 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,29 @@ CPUModule     &CPUModule::operator=(CPUModule const & src)
 
 std::string		CPUModule::getAvailableCPU(void) const
 {
-	char buf[100];
-	size_t buflen = 100;
+	uint64_t cpu = 0;
+	    size_t size = sizeof(cpu);
 
-	sysctlbyname("hw.physicalcpu", &buf, &buflen, NULL, 0);
-	return buf;
+	sysctlbyname("hw.physicalcpu", &cpu, &size, NULL, 0);
+	return std::to_string(cpu);
 }
 
 std::string		CPUModule::getCPUNumber(void) const
 {
-	char buf[100];
-	size_t buflen = 100;
+	uint64_t cpu = 0;
+	    size_t size = sizeof(cpu);
 
-	sysctlbyname("hw.physicalcpu_max", &buf, &buflen, NULL, 0);
-	return std::string(buf);
+	sysctlbyname("hw.physicalcpu_max", &cpu, &size, NULL, 0);
+	return std::to_string(cpu);
 }
 
 std::string		CPUModule::getCPUFrequ(void) const
 {
-	char buf[100];
-	size_t buflen = 100;
+	uint64_t freq = 0;
+	    size_t size = sizeof(freq);
 
-	sysctlbyname("hw.cpufrequency", &buf, &buflen, NULL, 0);
-	return std::string(buf);
+	sysctlbyname("hw.cpufrequency", &freq, &size, NULL, 0);
+	return std::to_string(freq);
 }
 
 std::string CPUModule::getCPUName(void) const
