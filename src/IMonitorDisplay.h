@@ -13,27 +13,21 @@
 #ifndef __IMONITORDISPLAY_H
 # define __IMONITORDISPLAY_H
 
-#include <cstdarg>
+#include "IMonitorModule.h"
 
-class IMonitorDisplay;
-
-enum MonitorDisplayType {
-	MonitorDisplayTUI,
-	MonitorDisplayGUI
-};
+#include <vector>
 
 class IMonitorDisplay {
 private:
-	const enum MonitorDisplayType _type;
+	std::vector<IMonitorModule> const &_modules;
 
 public:
-	IMonitorDisplay(enum MonitorDisplayType type);
+	IMonitorDisplay(std::vector<IMonitorModule> const &modules);
 	virtual ~IMonitorDisplay();
-
-	enum MonitorDisplayType getType() const;
 
 	virtual int init();
 	virtual int exit();
+	virtual int show();
 	virtual int draw(int line, int column, const char *fmt, ...);
 };
 

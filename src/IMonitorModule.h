@@ -27,8 +27,8 @@ public:
 
 	const std::string getName() const;
 
-	virtual int init();
-	virtual int exit();
+	virtual int init() const;
+	virtual int exit() const;
 	virtual int pump(IMonitorDisplay &display);
 };
 

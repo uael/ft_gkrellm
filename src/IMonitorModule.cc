@@ -23,11 +23,13 @@ const std::string IMonitorModule::getName() const {
 	return _name;
 }
 
-int IMonitorModule::init() {
+int IMonitorModule::init() const
+{
 	throw std::logic_error("Function not yet implemented");
 }
 
-int IMonitorModule::exit() {
+int IMonitorModule::exit() const
+{
 	throw std::logic_error("Function not yet implemented");
 }
 
