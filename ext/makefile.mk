@@ -17,7 +17,6 @@ $(eval $(call target_lib,libimgui,IMGUI_OBJ,IMGUI_LIB))
 $(IMGUI_DIR)/imgui_draw.cpp: $(IMGUI_DIR)
 $(IMGUI_LIB): INCLUDE += $(IMGUI_INCLUDE)
 $(IMGUI_LIB): LDLIBS  += allegro allegro_primitives
-$(IMGUI_LIB): -DIMGUI_USER_CONFIG=\"examples/example_allegro5/imconfig_allegro5.h\"
 
 # ------------------------------------------------------------------------------
 # Fetching rules
