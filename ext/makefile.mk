@@ -6,14 +6,18 @@ IMGUI_DIR = ext/imgui.git
 $(IMGUI_DIR): CLONE_URL = https://github.com/ocornut/imgui.git
 $(IMGUI_DIR): CLONE_TAG = master
 
-IMGUI_INCLUDE := $(IMGUI_DIR)
+IMGUI_INCLUDE := $(IMGUI_DIR) $(IMGUI_DIR)/examples
 IMGUI_OBJ += $(IMGUI_DIR)/imgui_draw.o \
              $(IMGUI_DIR)/imgui.o \
-             $(IMGUI_DIR)/imgui_widgets.o
+             $(IMGUI_DIR)/imgui_demo.o \
+             $(IMGUI_DIR)/imgui_widgets.o \
+             $(IMGUI_DIR)/examples/imgui_impl_allegro5.o
 
 $(eval $(call target_lib,libimgui,IMGUI_OBJ,IMGUI_LIB))
 $(IMGUI_DIR)/imgui_draw.cpp: $(IMGUI_DIR)
 $(IMGUI_LIB): INCLUDE += $(IMGUI_INCLUDE)
+$(IMGUI_LIB): LDLIBS  += allegro allegro_primitives
+$(IMGUI_LIB): -DIMGUI_USER_CONFIG=\"examples/example_allegro5/imconfig_allegro5.h\"
 
 # ------------------------------------------------------------------------------
 # Fetching rules

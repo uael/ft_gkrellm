@@ -16,7 +16,7 @@
 
 int main() {
 	std::vector<IMonitorModule> modules = std::vector<IMonitorModule>();
-	ImgUI display(modules);
+	ImgUIMonitorDisplay display(modules);
 
 	if (display.init())
 		return 1;

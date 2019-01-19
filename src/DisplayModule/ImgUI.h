@@ -17,11 +17,19 @@
 #include "IMonitorDisplay.h"
 
 #include <imgui.h>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_primitives.h>
 
-class ImgUI : public IMonitorDisplay {
+class ImgUIMonitorDisplay : public IMonitorDisplay {
+private:
+	ImGuiIO _io;
+	ALLEGRO_DISPLAY *_display;
+	ALLEGRO_EVENT_QUEUE *_queue;
+	bool _running;
+
 public:
-	ImgUI(std::vector<IMonitorModule> const &modules);
-	~ImgUI();
+	ImgUIMonitorDisplay(std::vector<IMonitorModule> const &modules);
+	~ImgUIMonitorDisplay();
 
 	int init();
 	int exit();
