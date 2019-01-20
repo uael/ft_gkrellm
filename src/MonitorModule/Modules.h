@@ -14,6 +14,7 @@
 # define __MONITORMODULE_MODULES_H
 
 #include "IMonitorModule.h"
+#include "IMonitorDisplay.h"
 
 #include <vector>
 #include <sys/utsname.h>
@@ -56,7 +57,6 @@ private:
 	int64_t used_ram;
 	int64_t wired_ram;
 	int64_t free_ram;
-
 	std::vector<float> _used_plot;
 	std::vector<float> _wired_plot;
 	clock_t _clock;
@@ -66,6 +66,14 @@ public:
 	~RAMModule();
 
 	int init();
+	int pump(IMonitorDisplay &display);
+};
+
+class TimeModule : public IMonitorModule {
+public:
+	TimeModule();
+	~TimeModule();
+
 	int pump(IMonitorDisplay &display);
 };
 
