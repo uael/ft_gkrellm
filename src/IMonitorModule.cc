@@ -25,14 +25,12 @@ const std::string IMonitorModule::getName() const {
 	return _name;
 }
 
-int IMonitorModule::init() const
-{
-	throw std::logic_error("Function not yet implemented");
+int IMonitorModule::init() const {
+	return 0;
 }
 
-int IMonitorModule::exit() const
-{
-	throw std::logic_error("Function not yet implemented");
+int IMonitorModule::exit() const {
+	return 0;
 }
 
 int IMonitorModule::pump(IMonitorDisplay &display) {
@@ -40,7 +38,7 @@ int IMonitorModule::pump(IMonitorDisplay &display) {
 	throw std::logic_error("Function not yet implemented");
 }
 
-std::string		IMonitorModule::getTopInfo(void)
+std::string IMonitorModule::getTopInfo()
 {
 	int filedes[2];
 	char foo[4096];
@@ -64,6 +62,7 @@ std::string		IMonitorModule::getTopInfo(void)
 	}else{
 		close(filedes[1]);
 		int nbytes = read(filedes[0], foo, sizeof(foo));
+		(void)nbytes;
 		return foo;
 	}
 	return NULL;
