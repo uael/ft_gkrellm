@@ -107,5 +107,7 @@ RAMModule &RAMModule::operator=(RAMModule const &src) {
 	wired_ram = src.wired_ram;
 	free_ram = src.free_ram;
 	_clock = src._clock;
+	_used_plot = std::vector<float>(src._used_plot);
+	_wired_plot = std::vector<float>(src._wired_plot);
 	return *this;
 }
