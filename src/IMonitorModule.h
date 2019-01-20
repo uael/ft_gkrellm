@@ -27,10 +27,10 @@ public:
 	IMonitorModule(std::string name);
 	virtual ~IMonitorModule();
 
-	virtual const std::string getName() const;
+	const std::string getName() const;
 
-	virtual int init() const;
-	virtual int exit() const;
+	virtual int init();
+	virtual int exit();
 	virtual int pump(IMonitorDisplay &display);
 	std::string getTopInfo();
 	std::string getTopInfoByName();

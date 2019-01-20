@@ -25,15 +25,16 @@ const std::string IMonitorModule::getName() const {
 	return _name;
 }
 
-int IMonitorModule::init() const {
+int IMonitorModule::init() {
 	return 0;
 }
 
-int IMonitorModule::exit() const {
+int IMonitorModule::exit() {
 	return 0;
 }
 
-int IMonitorModule::pump(IMonitorDisplay &display) {
+int IMonitorModule::pump(IMonitorDisplay &display)
+{
 	(void)display;
 	throw std::logic_error("Function not yet implemented");
 }

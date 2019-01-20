@@ -11,11 +11,57 @@
 /* ************************************************************************** */
 
 #include "CPU.h"
+#include "IMonitorDisplay.h"
 
-CPUModule::CPUModule() : IMonitorModule("CPU") { }
+#include <unistd.h>
+#include <stdlib.h>
+#include <iomanip>
+#include <sstream>
+
+#include <sys/types.h>
+#include <sys/sysctl.h>
+
+CPUModule::CPUModule() : IMonitorModule("CPU"), _plot(), _clock() { }
 
 CPUModule::~CPUModule() { }
 
 int CPUModule::pump(IMonitorDisplay &display) {
-	return IMonitorModule::pump(display);
+	char cpu[256];
+	size_t size = sizeof(cpu);
+
+	if (sysctlbyname("machdep.cpu.brand_string", &cpu, &size, nullptr, 0) < 0) {
+		display.draw("error");
+		return 0;
+	}
+
+	int core_count;
+	int thread_count;
+	if (sysctlbyname("machdep.cpu.core_count",
+	                 &core_count, &size, nullptr, 0) < 0)
+		core_count = 0;
+	if (sysctlbyname("machdep.cpu.thread_count",
+	                 &thread_count, &size, nullptr, 0) < 0)
+		thread_count = 0;
+
+	display.draw("%s (%dC/%dT)", cpu, core_count, thread_count);
+
+	double load[3] = { 0, 0, 0 };
+	getloadavg(load, 3);
+
+	clock_t now = clock();
+	if (!_clock || ((double)(now - _clock) / CLOCKS_PER_SEC >= 0.1)) {
+		_plot.push_back(static_cast<float const &>(load[0]));
+		_clock = now;
+	}
+
+	/* Pop value */
+	if (_plot.size() > 50) {
+		_plot.front() = std::move(_plot.back());
+		_plot.pop_back();
+	}
+
+	display.draw("Load : %.2f, %.2f, %.2f", load[0], load[1], load[2]);
+	display.plot(_plot.data(), _plot.size());
+
+	return 0;
 }

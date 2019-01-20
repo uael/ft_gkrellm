@@ -26,9 +26,10 @@ private:
 	ALLEGRO_DISPLAY *_display;
 	ALLEGRO_EVENT_QUEUE *_queue;
 	bool _running;
+	bool *_wins;
 
 public:
-	ImgUIMonitorDisplay(std::vector<IMonitorModule> const &modules);
+	ImgUIMonitorDisplay(std::vector<IMonitorModule *> const &modules);
 	~ImgUIMonitorDisplay();
 
 	int init();

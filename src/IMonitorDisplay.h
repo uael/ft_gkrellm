@@ -18,11 +18,11 @@
 #include <vector>
 
 class IMonitorDisplay {
-private:
-	std::vector<IMonitorModule> const &_modules;
+protected:
+	std::vector<IMonitorModule *> const &_modules;
 
 public:
-	IMonitorDisplay(std::vector<IMonitorModule> const &modules);
+	IMonitorDisplay(std::vector<IMonitorModule *> const &modules);
 	virtual ~IMonitorDisplay();
 
 	virtual int init();

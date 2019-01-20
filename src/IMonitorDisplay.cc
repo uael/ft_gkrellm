@@ -14,14 +14,14 @@
 
 #include <stdexcept>
 
-IMonitorDisplay::IMonitorDisplay(std::vector<IMonitorModule> const &modules)
+IMonitorDisplay::IMonitorDisplay(std::vector<IMonitorModule *> const &modules)
 	: _modules(modules) { }
 
 IMonitorDisplay::~IMonitorDisplay() { }
 
 int IMonitorDisplay::init() {
 	for (size_t i = 0; i < _modules.size(); i++) {
-		int const err = _modules[i].init();
+		int const err = _modules[i]->init();
 		if (err) return err;
 	}
 
@@ -30,7 +30,7 @@ int IMonitorDisplay::init() {
 
 int IMonitorDisplay::exit() {
 	for (size_t i = 0; i < _modules.size(); i++) {
-		int const err = _modules[i].exit();
+		int const err = _modules[i]->exit();
 		if (err) return err;
 	}
 

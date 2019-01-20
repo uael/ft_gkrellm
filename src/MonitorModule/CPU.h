@@ -15,7 +15,13 @@
 
 #include "IMonitorModule.h"
 
+#include <vector>
+
 class CPUModule : public IMonitorModule {
+private:
+	std::vector<float> _plot;
+	clock_t _clock;
+
 public:
 	CPUModule();
 	~CPUModule();
