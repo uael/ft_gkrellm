@@ -22,17 +22,16 @@ int real_main(int argc, char **argv) {
 
 	HostnameModule Hostname = HostnameModule();
 	modules.push_back(&Hostname);
+	TimeModule Time = TimeModule();
+	modules.push_back(&Time);
 	OSInfoModule OSInfo = OSInfoModule();
 	modules.push_back(&OSInfo);
 	CPUModule CPU = CPUModule();
 	modules.push_back(&CPU);
 	RAMModule RAM = RAMModule();
 	modules.push_back(&RAM);
-	TimeModule Time = TimeModule();
-	modules.push_back(&Time);
 	NetworkModule Network = NetworkModule();
 	modules.push_back(&Network);
-
 
 	IMonitorDisplay *display;
 	ImgUIMonitorDisplay imgui = ImgUIMonitorDisplay(modules);

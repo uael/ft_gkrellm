@@ -55,7 +55,7 @@ int CPUModule::pump(IMonitorDisplay &display) {
 	}
 
 	/* Pop value */
-	while (_plot.size() > 100)
+	while (_plot.size() > 50)
 		_plot.erase(_plot.begin());
 
 	display.draw("Load : %.2f, %.2f, %.2f", load[0], load[1], load[2]);

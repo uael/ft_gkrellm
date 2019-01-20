@@ -71,7 +71,7 @@ int RAMModule::pump(IMonitorDisplay &display) {
 	}
 
 	/* Pop value */
-	while (_used_plot.size() > 100)
+	while (_used_plot.size() > 50)
 		_used_plot.erase(_used_plot.begin());
 
 	display.draw("RAM : %.2lf/%.2lfGB",
