@@ -32,6 +32,8 @@ int real_main(int argc, char **argv) {
 	modules.push_back(&RAM);
 	NetworkModule Network = NetworkModule();
 	modules.push_back(&Network);
+	DiskModule Disk = DiskModule();
+	modules.push_back(&Disk);
 
 	IMonitorDisplay *display;
 	ImgUIMonitorDisplay imgui = ImgUIMonitorDisplay(modules);

@@ -89,4 +89,16 @@ public:
 	int pump(IMonitorDisplay &display);
 };
 
+class DiskModule : public IMonitorModule {
+private:
+	clock_t _clock;
+	std::string _data;
+
+public:
+	DiskModule();
+	~DiskModule();
+
+	int pump(IMonitorDisplay &display);
+};
+
 #endif /* !__MONITORMODULE_MODULES_H */

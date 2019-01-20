@@ -8,7 +8,8 @@ GKRELLM_OBJ += src/main.o \
                src/MonitorModule/OSInfo.o \
                src/MonitorModule/RAM.o \
                src/MonitorModule/Time.o \
-               src/MonitorModule/Network.o
+               src/MonitorModule/Network.o \
+               src/MonitorModule/Disk.o
 
 $(eval $(call target_bin,ft_gkrellm,GKRELLM_OBJ,GKRELLM_BIN))
 $(GKRELLM_BIN): $(IMGUI_LIB)
