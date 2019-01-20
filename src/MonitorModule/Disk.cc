@@ -6,7 +6,7 @@
 /*   By: alucas- <alucas-@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:42 by alucas-           #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:42 by alucas-          ###   ########.fr       */
+/*   Updated: 2019/01/20 17:09:11 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,20 @@ DiskModule::DiskModule()
 	: IMonitorModule("Disk"), _clock(), _data() { }
 
 DiskModule::~DiskModule() { }
+
+
+DiskModule::DiskModule(DiskModule const &src): IMonitorModule("Disk"), _clock(), _data()
+{
+	*this = src;
+}
+
+DiskModule     &DiskModule::operator=(DiskModule const & src) 
+{
+	(void)src;
+	this->_clock = src._clock;
+	this->_data = src._data;
+	return *this;
+}
 
 int DiskModule::pump(IMonitorDisplay &display) {
 	clock_t now = clock();
