@@ -14,19 +14,16 @@
 
 #include <stdint.h>
 #include <err.h>
+#include <thread>
 
 #include "imgui_impl_allegro5.h"
 
 ImgUIMonitorDisplay::ImgUIMonitorDisplay(
 	std::vector<IMonitorModule *> const &modules)
 	: IMonitorDisplay(modules),
-	  _io(), _display(), _queue(), _running(), _wins() {
+	  _io(), _display(), _queue(), _running(), _wins() { }
 
-}
-
-ImgUIMonitorDisplay::~ImgUIMonitorDisplay() {
-
-}
+ImgUIMonitorDisplay::~ImgUIMonitorDisplay() { }
 
 int ImgUIMonitorDisplay::init() {
 	al_init();
@@ -34,7 +31,7 @@ int ImgUIMonitorDisplay::init() {
 	al_install_mouse();
 	al_init_primitives_addon();
 	al_set_new_display_flags(ALLEGRO_RESIZABLE);
-	_display = al_create_display(500, 500);
+	_display = al_create_display(1000, 1000);
 	al_set_window_title(_display, "GKrellM");
 	_queue = al_create_event_queue();
 	al_register_event_source(_queue, al_get_display_event_source(_display));
@@ -76,6 +73,10 @@ int ImgUIMonitorDisplay::show() {
 	while (_running) {
 		ALLEGRO_EVENT ev;
 
+		std::chrono::steady_clock::time_point end =
+			std::chrono::steady_clock::now() +
+			std::chrono::milliseconds(14);
+
 		while (al_get_next_event(_queue, &ev)) {
 			ImGui_ImplAllegro5_ProcessEvent(&ev);
 			if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
@@ -111,7 +112,10 @@ int ImgUIMonitorDisplay::show() {
 			clear_color.x, clear_color.y, clear_color.z, clear_color.w));
 		ImGui_ImplAllegro5_RenderDrawData(ImGui::GetDrawData());
 		al_flip_display();
+
+		std::this_thread::sleep_until(end);
 	}
+
 	return 0;
 }
 
