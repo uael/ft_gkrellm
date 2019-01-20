@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 19:03:44 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/01/20 15:29:46 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/01/20 15:56:38 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,14 @@ Ncurses::~Ncurses()
 int Ncurses::plot(const float *values, size_t nvalues, float min, float max)
 {
 	(void)min;
-	this->pos.y += 14;
+	this->pos.y += 15;
 
 	for (size_t x =  0 ; x < nvalues; x++)
 	{
-		for (int y = static_cast<int>(((values[x] -min)* 14.0) / (max - min)) ; y > 0 ; y--)
+		for (int y = static_cast<int>(((values[x] -min)* 14.0) / (max - min)) ; y >= 0 ; y--)
 		{
-			wattron(this->window, COLOR_PAIR(static_cast<int>(((values[x] -min)* 6.0) / (max - min)) ));
-			/* mvwprintw (this->window, 20, 20 ,"y%d  x%d nvalues%d", y, x, nvalues); */
-			mvwaddch(this->window, this->pos.y - y,this->pos.x +  x, ' ');
-			wattroff(this->window, COLOR_PAIR(y));
+			mvwaddch(this->window, this->pos.y - y,this->pos.x +  x,
+	(chtype)(COLOR_PAIR(1 +static_cast<int>(((values[x] -min)* 6.0) / (max - min)) ) | ' '));
 		}
 	}
 	this->draw("\n");
@@ -83,13 +81,13 @@ int Ncurses::init()
 	nodelay(stdscr, true);
 	keypad(stdscr, true);
 	start_color();
-	init_pair(0, COLOR_WHITE, COLOR_WHITE);
-	init_pair(1, COLOR_YELLOW, COLOR_YELLOW);
-	init_pair(2, COLOR_GREEN, COLOR_GREEN);
-	init_pair(3, COLOR_CYAN, COLOR_CYAN);
-	init_pair(4, COLOR_BLUE, COLOR_BLUE);
-	init_pair(5, COLOR_MAGENTA, COLOR_MAGENTA);
-	init_pair(6, COLOR_RED, COLOR_RED);
+	init_pair(1, COLOR_WHITE, COLOR_WHITE);
+	init_pair(2, COLOR_WHITE, COLOR_YELLOW);
+	init_pair(3, COLOR_GREEN, COLOR_GREEN);
+	init_pair(4, COLOR_CYAN, COLOR_CYAN);
+	init_pair(5, COLOR_BLUE, COLOR_BLUE);
+	init_pair(6, COLOR_MAGENTA, COLOR_MAGENTA);
+	init_pair(7, COLOR_RED, COLOR_RED);
 	this->window = newwin(LINES, COLS , this->winPos.y, this->winPos.x);
 	wrefresh(this->window);
 	return IMonitorDisplay::init();
@@ -122,5 +120,5 @@ int		Ncurses::exit()
 {
 	clear();
 	endwin();
-	return IMonitorDisplay::exit();
+	return IMonitorDisplay::init();
 }
