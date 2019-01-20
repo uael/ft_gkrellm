@@ -14,5 +14,8 @@ ifeq (,$(OUTLIB_DIR))
   $(error Must precise OUTLIB_DIR)
 endif
 
+INCLUDE += $(HOME)/.brew/include
+LDDIRS  += $(HOME)/.brew/lib
+
 include ext/makefile.mk
 include src/makefile.mk

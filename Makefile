@@ -18,7 +18,7 @@
 
 CXX    := clang++
 LDX    := clang++
-AR     := llvm-ar
+AR     := ar
 CFLAGS += -std=c++98
 
 ifeq ($(DEBUG),)

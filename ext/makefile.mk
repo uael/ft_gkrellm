@@ -16,7 +16,6 @@ IMGUI_OBJ += $(IMGUI_DIR)/imgui_draw.o \
 $(eval $(call target_lib,libimgui,IMGUI_OBJ,IMGUI_LIB))
 $(IMGUI_DIR)/imgui_draw.cpp: $(IMGUI_DIR)
 $(IMGUI_LIB): INCLUDE += $(IMGUI_INCLUDE)
-$(IMGUI_LIB): LDLIBS  += allegro allegro_primitives
 
 # ------------------------------------------------------------------------------
 # Fetching rules
