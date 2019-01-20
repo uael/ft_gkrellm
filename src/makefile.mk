@@ -2,6 +2,7 @@ GKRELLM_OBJ += src/main.o \
                src/IMonitorModule.o \
                src/IMonitorDisplay.o \
                src/DisplayModule/ImgUI.o \
+               src/DisplayModule/Ncurses/Ncurses.o \
                src/MonitorModule/CPU.o \
                src/MonitorModule/Hostname.o \
                src/MonitorModule/OSInfo.o \
