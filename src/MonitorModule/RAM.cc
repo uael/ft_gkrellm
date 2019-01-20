@@ -45,7 +45,7 @@ int RAMModule::init() {
 int RAMModule::pump(IMonitorDisplay &display) {
 	clock_t now = clock();
 
-	if (!_clock || ((double)(now - _clock) / CLOCKS_PER_SEC >= 0.1)) {
+	if (!_clock || ((double)(now - _clock) / CLOCKS_PER_SEC >= 0.05)) {
 		vm_size_t page_size;
 		mach_port_t mach_port;
 		mach_msg_type_number_t count;
@@ -71,7 +71,7 @@ int RAMModule::pump(IMonitorDisplay &display) {
 	}
 
 	/* Pop value */
-	while (_used_plot.size() > 50)
+	while (_used_plot.size() > 100)
 		_used_plot.erase(_used_plot.begin());
 
 	display.draw("RAM : %.2lf/%.2lfGB",

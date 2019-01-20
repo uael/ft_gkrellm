@@ -49,13 +49,13 @@ int CPUModule::pump(IMonitorDisplay &display) {
 	getloadavg(load, 3);
 
 	clock_t now = clock();
-	if (!_clock || ((double)(now - _clock) / CLOCKS_PER_SEC >= 0.1)) {
+	if (!_clock || ((double)(now - _clock) / CLOCKS_PER_SEC >= 0.05)) {
 		_plot.push_back(static_cast<float const &>(load[0]));
 		_clock = now;
 	}
 
 	/* Pop value */
-	while (_plot.size() > 50)
+	while (_plot.size() > 100)
 		_plot.erase(_plot.begin());
 
 	display.draw("Load : %.2f, %.2f, %.2f", load[0], load[1], load[2]);
