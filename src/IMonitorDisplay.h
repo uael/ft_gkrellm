@@ -6,7 +6,7 @@
 /*   By: alucas- <alucas-@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:42 by alucas-           #+#    #+#             */
-/*   Updated: 2019/01/20 17:00:01 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/01/20 17:15:23 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@ protected:
 public:
 	IMonitorDisplay(std::vector<IMonitorModule *> const &modules);
 	virtual ~IMonitorDisplay();
-
-	IMonitorDisplay(IMonitorDisplay const &src);
-	IMonitorDisplay &operator=(IMonitorDisplay const & src);
 
 	virtual int init();
 	virtual int exit();

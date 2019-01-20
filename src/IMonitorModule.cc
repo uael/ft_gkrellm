@@ -6,7 +6,7 @@
 /*   By: alucas- <alucas-@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:42 by alucas-           #+#    #+#             */
-/*   Updated: 2019/01/20 17:06:21 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/01/20 17:15:46 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,6 @@ IMonitorModule::~IMonitorModule() { }
 
 const std::string IMonitorModule::getName() const {
 	return _name;
-}
-
-IMonitorModule::IMonitorModule(IMonitorModule const &src)
-{
-	*this = src;
-}
-
-IMonitorModule     &IMonitorModule::operator=(IMonitorModule const & src) 
-{
-	(void)src;
-	return *this;
 }
 
 int IMonitorModule::init() {
