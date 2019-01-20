@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "CPU.h"
+#include "Modules.h"
 #include "IMonitorDisplay.h"
 
 #include <unistd.h>

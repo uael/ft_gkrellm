@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   MonitorModule/CPU.h                                :+:      :+:    :+:   */
+/*   MonitorModule/Modules.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alucas- <alucas-@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,12 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __MONITORMODULE_CPU_H
-# define __MONITORMODULE_CPU_H
+#ifndef __MONITORMODULE_MODULES_H
+# define __MONITORMODULE_MODULES_H
 
 #include "IMonitorModule.h"
 
 #include <vector>
+
+class HostnameModule : public IMonitorModule {
+public:
+	HostnameModule();
+	~HostnameModule();
+
+	int pump(IMonitorDisplay &display);
+};
 
 class CPUModule : public IMonitorModule {
 private:
@@ -29,4 +37,4 @@ public:
 	int pump(IMonitorDisplay &display);
 };
 
-#endif /* !__MONITORMODULE_CPU_H */
+#endif /* !__MONITORMODULE_MODULES_H */
