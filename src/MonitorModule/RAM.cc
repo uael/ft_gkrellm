@@ -71,10 +71,8 @@ int RAMModule::pump(IMonitorDisplay &display) {
 	}
 
 	/* Pop value */
-	if (_used_plot.size() > 50) {
-		_used_plot.front() = std::move(_used_plot.back());
-		_used_plot.pop_back();
-	}
+	while (_used_plot.size() > 50)
+		_used_plot.erase(_used_plot.begin());
 
 	display.draw("RAM : %.2lf/%.2lfGB",
 		(double)used_ram / (1024*1024*1024),
@@ -84,10 +82,8 @@ int RAMModule::pump(IMonitorDisplay &display) {
 		*std::max_element(_used_plot.begin(), _used_plot.end()));
 
 	/* Pop value */
-	if (_wired_plot.size() > 50) {
-		_wired_plot.front() = std::move(_wired_plot.back());
-		_wired_plot.pop_back();
-	}
+	while (_wired_plot.size() > 50)
+		_wired_plot.erase(_wired_plot.begin());
 
 	display.draw("WIRED : %.2lf/%.2lfGB",
 		(double)wired_ram / (1024*1024*1024),
