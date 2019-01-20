@@ -6,7 +6,7 @@
 /*   By: alucas- <alucas-@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:42 by alucas-           #+#    #+#             */
-/*   Updated: 2019/01/20 17:02:21 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/01/20 17:23:16 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ class NetworkModule : public IMonitorModule {
 		std::string _data;
 
 	public:
+	NetworkModule(NetworkModule const &src);
+	NetworkModule &operator=(NetworkModule const & src);
 		NetworkModule();
 		~NetworkModule();
 
