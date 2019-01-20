@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 19:01:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/01/20 14:21:40 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/01/20 14:59:03 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <iostream>
 #include <ncurses.h>
 #include "../../IMonitorDisplay.h"
+#include <thread>
 
 typedef struct s_pos
 {
@@ -34,7 +35,7 @@ class 					Ncurses : public IMonitorDisplay
 		Ncurses(t_pos & winPos, t_pos & maxPos);
 		Ncurses(Ncurses const &src);
 		Ncurses 		&operator=(Ncurses const & src);
-		int plot(const float *values, size_t nvalues);
+		int plot(const float *values, size_t nvalues, float min, float max);
 		void	setColor(t_pos pos);
 		int draw(const char *fmt, ...);
 		int init();

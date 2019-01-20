@@ -6,7 +6,7 @@
 /*   By: alucas- <alucas-@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:42 by alucas-           #+#    #+#             */
-/*   Updated: 1970/01/01 00:00:42 by alucas-          ###   ########.fr       */
+/*   Updated: 2019/01/20 15:30:53 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ int OSInfoModule::init() {
 }
 
 int OSInfoModule::pump(IMonitorDisplay &display) {
+	char *str;
+
+	str = strchr(_uts.version, ';');
+	if (str)
+		*str = 0;
 	display.draw("%s", _uts.version);
+	if (str)
+		display.draw("%s", str + 2);
 	return 0;
 }
