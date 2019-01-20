@@ -7,14 +7,14 @@ $(IMGUI_DIR): CLONE_URL = https://github.com/uael/imgui.git
 $(IMGUI_DIR): CLONE_TAG = master
 
 IMGUI_INCLUDE := $(IMGUI_DIR) $(IMGUI_DIR)/examples
-IMGUI_OBJ += $(IMGUI_DIR)/imgui_draw.o \
-             $(IMGUI_DIR)/imgui.o \
-             $(IMGUI_DIR)/imgui_demo.o \
-             $(IMGUI_DIR)/imgui_widgets.o \
-             $(IMGUI_DIR)/examples/imgui_impl_allegro5.o
+IMGUI_SRC += $(IMGUI_DIR)/imgui.cpp \
+             $(IMGUI_DIR)/imgui_draw.cpp \
+             $(IMGUI_DIR)/imgui_widgets.cpp \
+             $(IMGUI_DIR)/examples/imgui_impl_allegro5.cpp
+IMGUI_OBJ := $(patsubst %.cpp,%.o,$(IMGUI_SRC))
 
 $(eval $(call target_lib,libimgui,IMGUI_OBJ,IMGUI_LIB))
-$(IMGUI_DIR)/imgui_draw.cpp: $(IMGUI_DIR)
+$(IMGUI_SRC): $(IMGUI_DIR)
 $(IMGUI_LIB): INCLUDE += $(IMGUI_INCLUDE)
 
 # ------------------------------------------------------------------------------
