@@ -54,3 +54,13 @@ int IMonitorDisplay::plot(const float *values, size_t nvalues,
 	(void)max;
 	throw std::logic_error("Function not yet implemented");
 }
+
+IMonitorDisplay::IMonitorDisplay(IMonitorDisplay const &src)
+	: _modules(src._modules) {
+	*this = src;
+}
+
+IMonitorDisplay &IMonitorDisplay::operator=(IMonitorDisplay const &src) {
+	(void)src;
+	return *this;
+}

@@ -93,3 +93,19 @@ int RAMModule::pump(IMonitorDisplay &display) {
 		 *std::max_element(_wired_plot.begin(), _wired_plot.end()));
 	return 0;
 }
+
+RAMModule::RAMModule(RAMModule const &src)
+	: IMonitorModule("Memory"),
+	  total_ram(), used_ram(), wired_ram(), free_ram(),
+	  _used_plot(), _wired_plot(), _clock() {
+	*this = src;
+}
+
+RAMModule &RAMModule::operator=(RAMModule const &src) {
+	total_ram = src.total_ram;
+	used_ram = src.used_ram;
+	wired_ram = src.wired_ram;
+	free_ram = src.free_ram;
+	_clock = src._clock;
+	return *this;
+}

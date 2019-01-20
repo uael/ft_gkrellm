@@ -27,15 +27,14 @@ public:
 	IMonitorModule(std::string name);
 	virtual ~IMonitorModule();
 
+	IMonitorModule(IMonitorModule const &src);
+	IMonitorModule &operator=(IMonitorModule const & src);
+
 	const std::string getName() const;
 
 	virtual int init();
 	virtual int exit();
 	virtual int pump(IMonitorDisplay &display);
-	std::string getTopInfo();
-	std::string getTopInfoByName();
-	IMonitorModule(IMonitorModule const &src);
-	IMonitorModule     &operator=(IMonitorModule const & src) ;
 };
 
 #endif /* !__IMONITORMODULE_H */

@@ -58,21 +58,24 @@ class OSInfoModule : public IMonitorModule {
 };
 
 class RAMModule : public IMonitorModule {
-	private:
-		int64_t total_ram;
-		int64_t used_ram;
-		int64_t wired_ram;
-		int64_t free_ram;
-		std::vector<float> _used_plot;
-		std::vector<float> _wired_plot;
-		clock_t _clock;
+private:
+	int64_t total_ram;
+	int64_t used_ram;
+	int64_t wired_ram;
+	int64_t free_ram;
+	std::vector<float> _used_plot;
+	std::vector<float> _wired_plot;
+	clock_t _clock;
 
-	public:
-		RAMModule();
-		~RAMModule();
+public:
+	RAMModule();
+	~RAMModule();
 
-		int init();
-		int pump(IMonitorDisplay &display);
+	RAMModule(RAMModule const &src);
+	RAMModule &operator=(RAMModule const & src);
+
+	int init();
+	int pump(IMonitorDisplay &display);
 };
 
 class TimeModule : public IMonitorModule {
@@ -80,7 +83,10 @@ class TimeModule : public IMonitorModule {
 		TimeModule();
 		~TimeModule();
 
-		int pump(IMonitorDisplay &display);
+	TimeModule(TimeModule const &src);
+	TimeModule &operator=(TimeModule const & src);
+
+	int pump(IMonitorDisplay &display);
 };
 
 class NetworkModule : public IMonitorModule {

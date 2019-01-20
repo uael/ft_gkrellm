@@ -31,7 +31,7 @@ int ImgUIMonitorDisplay::init() {
 	al_install_mouse();
 	al_init_primitives_addon();
 	al_set_new_display_flags(ALLEGRO_RESIZABLE);
-	_display = al_create_display(1000, 1000);
+	_display = al_create_display(750, 630);
 	al_set_window_title(_display, "GKrellM");
 	_queue = al_create_event_queue();
 	al_register_event_source(_queue, al_get_display_event_source(_display));
@@ -134,4 +134,19 @@ int ImgUIMonitorDisplay::plot(const float *values, size_t nvalues,
 	ImGui::PlotLines("##plot", values, (int)nvalues, 0,
 		nullptr, min, max, ImVec2(350, 150));
 	return 0;
+}
+
+ImgUIMonitorDisplay::ImgUIMonitorDisplay(ImgUIMonitorDisplay const &src)
+	: IMonitorDisplay(src._modules) {
+	*this = src;
+}
+
+ImgUIMonitorDisplay &ImgUIMonitorDisplay::operator=(
+	ImgUIMonitorDisplay const &src) {
+	_io = src._io;
+	_display = src._display;
+	_queue = src._queue;
+	_running = src._running;
+	_wins = src._wins;
+	return *this;
 }
