@@ -34,13 +34,13 @@ Ncurses::Ncurses(std::vector<IMonitorModule *> const &modules) : IMonitorDisplay
 
 }
 
-Ncurses     &Ncurses::operator=(Ncurses const & src) 
+Ncurses     &Ncurses::operator=(Ncurses const & src)
 {
 	(void)src;
 	return *this;
 }
 
-Ncurses::~Ncurses() 
+Ncurses::~Ncurses()
 {
 
 }
@@ -69,8 +69,8 @@ int Ncurses::draw(const char *fmt, ...)
 {
 	va_list args;
 	va_start (args, fmt);
+	wmove(this->window, this->pos.y++, 0);
 	vwprintw (this->window, fmt, args);
-	this->pos.y++;
 	va_end (args);
 	return 0;
 }
@@ -107,6 +107,7 @@ int Ncurses::show()
 			wmove(this->window, this->pos.y, this->pos.x);
 			this->draw("%s: \n", _modules[i]->getName().c_str());
 			_modules[i]->pump(*this);
+			++this->pos.y;
 		}
 		wrefresh(this->window);
 		werase(this->window);
