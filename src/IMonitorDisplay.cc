@@ -6,7 +6,7 @@
 /*   By: alucas- <alucas-@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 00:00:42 by alucas-           #+#    #+#             */
-/*   Updated: 2019/01/19 22:59:23 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/01/20 17:32:10 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 IMonitorDisplay::IMonitorDisplay(std::vector<IMonitorModule *> const &modules)
 	: _modules(modules) { }
+
 
 IMonitorDisplay::~IMonitorDisplay() { }
 

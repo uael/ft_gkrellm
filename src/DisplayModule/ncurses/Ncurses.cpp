@@ -6,27 +6,27 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 19:03:44 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/01/20 15:56:38 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/01/20 17:32:44 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "Ncurses.hpp"
 
-/* Ncurses::Ncurses(t_pos & winPos, t_pos & maxPos) :winPos(winPos), maxPos(maxPos) */
-/* { */
-/* 	return ; */
-/* } */
+Ncurses::Ncurses(t_pos & winPos, t_pos & maxPos) :winPos(winPos), maxPos(maxPos)
+{
+	return ;
+}
 
-/* Ncurses::Ncurses() :winPos((t_pos){0, 0}), maxPos((t_pos){.x=COLS, .y=LINES}) */
-/* { */
-/* 	return ; */
-/* } */
+Ncurses::Ncurses() :IMonitorDisplay(), winPos((t_pos){0, 0}), maxPos((t_pos){.x=COLS, .y=LINES}) 
+{
+	return ;
+}
 
-/* Ncurses::Ncurses(Ncurses const &src) */
-/* { */
-/* 	*this = src; */
-/* } */
+Ncurses::Ncurses(Ncurses const &src) : IMonitorDisplay(src)
+{
+	*this = src;
+}
 
 Ncurses::Ncurses(std::vector<IMonitorModule *> const &modules) : IMonitorDisplay(modules) , winPos((t_pos){0, 0}), maxPos((t_pos){.x=COLS, .y=LINES}) , pos((t_pos){0, 0})
 {
