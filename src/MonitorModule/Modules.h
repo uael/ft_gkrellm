@@ -77,4 +77,16 @@ public:
 	int pump(IMonitorDisplay &display);
 };
 
+class NetworkModule : public IMonitorModule {
+private:
+	clock_t _clock;
+	std::string _data;
+
+public:
+	NetworkModule();
+	~NetworkModule();
+
+	int pump(IMonitorDisplay &display);
+};
+
 #endif /* !__MONITORMODULE_MODULES_H */

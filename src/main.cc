@@ -29,6 +29,8 @@ int real_main(int argc, char **argv) {
 	modules.push_back(&RAM);
 	TimeModule Time = TimeModule();
 	modules.push_back(&Time);
+	NetworkModule Network = NetworkModule();
+	modules.push_back(&Network);
 
 	ImgUIMonitorDisplay display(modules);
 
