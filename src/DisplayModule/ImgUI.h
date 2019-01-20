@@ -36,7 +36,7 @@ public:
 	int exit();
 	int show();
 	int draw(const char *fmt, ...);
-	int plot(const float *values, size_t nvalues);
+	int plot(const float *values, size_t nvalues, float min, float max);
 };
 
 #endif /* !__DISPLAYMODULE_IMGUI_H */

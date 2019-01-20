@@ -29,7 +29,7 @@ public:
 	virtual int exit();
 	virtual int show();
 	virtual int draw(const char *fmt, ...);
-	virtual int plot(const float *values, size_t nvalues);
+	virtual int plot(const float *values, size_t nvalues, float min, float max);
 };
 
 #endif /* !__IMONITORDISPLAY_H */

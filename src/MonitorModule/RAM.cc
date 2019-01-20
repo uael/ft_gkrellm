@@ -64,8 +64,8 @@ int RAMModule::pump(IMonitorDisplay &display) {
 			free_ram = total_ram - used_ram;
 		}
 
-		_used_plot.push_back(used_ram);
-		_wired_plot.push_back(wired_ram);
+		_used_plot.push_back((float)used_ram / (1024*1024));
+		_wired_plot.push_back((float)wired_ram / (1024*1024));
 
 		_clock = now;
 	}
@@ -79,7 +79,9 @@ int RAMModule::pump(IMonitorDisplay &display) {
 	display.draw("RAM : %.2lf/%.2lfGB",
 		(double)used_ram / (1024*1024*1024),
 		(double)total_ram / (1024*1024*1024));
-	display.plot(_used_plot.data(), _used_plot.size());
+	display.plot(_used_plot.data(), _used_plot.size(),
+		*std::min_element(_used_plot.begin(), _used_plot.end()),
+		*std::max_element(_used_plot.begin(), _used_plot.end()));
 
 	/* Pop value */
 	if (_wired_plot.size() > 50) {
@@ -90,6 +92,8 @@ int RAMModule::pump(IMonitorDisplay &display) {
 	display.draw("WIRED : %.2lf/%.2lfGB",
 		(double)wired_ram / (1024*1024*1024),
 		(double)total_ram / (1024*1024*1024));
-	display.plot(_wired_plot.data(), _wired_plot.size());
+	display.plot(_wired_plot.data(), _wired_plot.size(),
+		 *std::min_element(_wired_plot.begin(), _wired_plot.end()),
+		 *std::max_element(_wired_plot.begin(), _wired_plot.end()));
 	return 0;
 }

@@ -61,7 +61,9 @@ int CPUModule::pump(IMonitorDisplay &display) {
 	}
 
 	display.draw("Load : %.2f, %.2f, %.2f", load[0], load[1], load[2]);
-	display.plot(_plot.data(), _plot.size());
+	display.plot(_plot.data(), _plot.size(),
+		*std::min_element(_plot.begin(), _plot.end()),
+		*std::max_element(_plot.begin(), _plot.end()));
 
 	return 0;
 }

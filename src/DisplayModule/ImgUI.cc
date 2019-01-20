@@ -128,9 +128,10 @@ int ImgUIMonitorDisplay::draw(const char *fmt, ...) {
 	return 0;
 }
 
-int ImgUIMonitorDisplay::plot(const float *values, size_t nvalues) {
+int ImgUIMonitorDisplay::plot(const float *values, size_t nvalues,
+	float min, float max) {
 
 	ImGui::PlotLines("##plot", values, (int)nvalues, 0,
-		nullptr, 0, FLT_MAX, ImVec2(350, 150));
+		nullptr, min, max, ImVec2(350, 150));
 	return 0;
 }
