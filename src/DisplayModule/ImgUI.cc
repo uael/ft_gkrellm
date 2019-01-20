@@ -31,7 +31,7 @@ int ImgUIMonitorDisplay::init() {
 	al_install_mouse();
 	al_init_primitives_addon();
 	al_set_new_display_flags(ALLEGRO_RESIZABLE);
-	_display = al_create_display(1000, 1000);
+	_display = al_create_display(750, 630);
 	al_set_window_title(_display, "GKrellM");
 	_queue = al_create_event_queue();
 	al_register_event_source(_queue, al_get_display_event_source(_display));
