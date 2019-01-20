@@ -25,7 +25,10 @@
 #include <mach/mach_init.h>
 #include <mach/mach_host.h>
 
-RAMModule::RAMModule() : IMonitorModule("Memory"), total_ram() { }
+RAMModule::RAMModule()
+	: IMonitorModule("Memory"),
+	  total_ram(), used_ram(), wired_ram(), free_ram(),
+	  _used_plot(), _wired_plot(), _clock() { }
 
 RAMModule::~RAMModule() { }
 
@@ -40,24 +43,53 @@ int RAMModule::init() {
 }
 
 int RAMModule::pump(IMonitorDisplay &display) {
-	vm_size_t page_size;
-	mach_port_t mach_port;
-	mach_msg_type_number_t count;
-	vm_statistics64_data_t vm_stats = { };
+	clock_t now = clock();
 
-	mach_port = mach_host_self();
-	count = sizeof(vm_stats) / sizeof(natural_t);
-	if (host_page_size(mach_port, &page_size) == KERN_SUCCESS &&
-	    host_statistics64(mach_port, HOST_VM_INFO, reinterpret_cast<
-	    host_info64_t>(&vm_stats), &count) == KERN_SUCCESS) {
-		used_ram = (static_cast<int64_t>(vm_stats.active_count) +
-			static_cast<int64_t>(vm_stats.inactive_count)) *
-			static_cast<int64_t>(page_size);
-		wired_ram = static_cast<int64_t>(vm_stats.wire_count) *
-		    static_cast<int64_t>(page_size);
-		free_ram = total_ram - used_ram;
+	if (!_clock || ((double)(now - _clock) / CLOCKS_PER_SEC >= 0.1)) {
+		vm_size_t page_size;
+		mach_port_t mach_port;
+		mach_msg_type_number_t count;
+		vm_statistics64_data_t vm_stats = { };
+
+		mach_port = mach_host_self();
+		count = sizeof(vm_stats) / sizeof(natural_t);
+		if (host_page_size(mach_port, &page_size) == KERN_SUCCESS &&
+		    host_statistics64(mach_port, HOST_VM_INFO, reinterpret_cast<
+			    host_info64_t>(&vm_stats), &count) == KERN_SUCCESS) {
+			used_ram = (static_cast<int64_t>(vm_stats.active_count) +
+			            static_cast<int64_t>(vm_stats.inactive_count)) *
+			           static_cast<int64_t>(page_size);
+			wired_ram = static_cast<int64_t>(vm_stats.wire_count) *
+			            static_cast<int64_t>(page_size);
+			free_ram = total_ram - used_ram;
+		}
+
+		_used_plot.push_back(used_ram);
+		_wired_plot.push_back(wired_ram);
+
+		_clock = now;
 	}
 
-	display.draw("%s", "yay");
+	/* Pop value */
+	if (_used_plot.size() > 50) {
+		_used_plot.front() = std::move(_used_plot.back());
+		_used_plot.pop_back();
+	}
+
+	display.draw("RAM : %.2lf/%.2lfGB",
+		(double)used_ram / (1024*1024*1024),
+		(double)total_ram / (1024*1024*1024));
+	display.plot(_used_plot.data(), _used_plot.size());
+
+	/* Pop value */
+	if (_wired_plot.size() > 50) {
+		_wired_plot.front() = std::move(_wired_plot.back());
+		_wired_plot.pop_back();
+	}
+
+	display.draw("WIRED : %.2lf/%.2lfGB",
+		(double)wired_ram / (1024*1024*1024),
+		(double)total_ram / (1024*1024*1024));
+	display.plot(_wired_plot.data(), _wired_plot.size());
 	return 0;
 }

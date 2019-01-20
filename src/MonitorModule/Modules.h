@@ -57,6 +57,10 @@ private:
 	int64_t wired_ram;
 	int64_t free_ram;
 
+	std::vector<float> _used_plot;
+	std::vector<float> _wired_plot;
+	clock_t _clock;
+
 public:
 	RAMModule();
 	~RAMModule();
