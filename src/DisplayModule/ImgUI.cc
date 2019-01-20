@@ -135,3 +135,18 @@ int ImgUIMonitorDisplay::plot(const float *values, size_t nvalues,
 		nullptr, min, max, ImVec2(350, 150));
 	return 0;
 }
+
+ImgUIMonitorDisplay::ImgUIMonitorDisplay(ImgUIMonitorDisplay const &src)
+	: IMonitorDisplay(src._modules) {
+	*this = src;
+}
+
+ImgUIMonitorDisplay &ImgUIMonitorDisplay::operator=(
+	ImgUIMonitorDisplay const &src) {
+	_io = src._io;
+	_display = src._display;
+	_queue = src._queue;
+	_running = src._running;
+	_wins = src._wins;
+	return *this;
+}

@@ -32,6 +32,9 @@ public:
 	ImgUIMonitorDisplay(std::vector<IMonitorModule *> const &modules);
 	~ImgUIMonitorDisplay();
 
+	ImgUIMonitorDisplay(ImgUIMonitorDisplay const &src);
+	ImgUIMonitorDisplay &operator=(ImgUIMonitorDisplay const & src);
+
 	int init();
 	int exit();
 	int show();

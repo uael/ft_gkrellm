@@ -25,6 +25,9 @@ public:
 	IMonitorDisplay(std::vector<IMonitorModule *> const &modules);
 	virtual ~IMonitorDisplay();
 
+	IMonitorDisplay(IMonitorDisplay const &src);
+	IMonitorDisplay &operator=(IMonitorDisplay const & src);
+
 	virtual int init();
 	virtual int exit();
 	virtual int show();

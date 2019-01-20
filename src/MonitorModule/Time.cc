@@ -27,3 +27,12 @@ int TimeModule::pump(IMonitorDisplay &display) {
 	display.draw("%s", buf);
 	return 0;
 }
+
+TimeModule::TimeModule(TimeModule const &src) : IMonitorModule("Time") {
+	*this = src;
+}
+
+TimeModule &TimeModule::operator=(TimeModule const &src) {
+	(void)src;
+	return *this;
+}

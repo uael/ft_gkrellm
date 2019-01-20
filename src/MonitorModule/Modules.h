@@ -65,6 +65,9 @@ public:
 	RAMModule();
 	~RAMModule();
 
+	RAMModule(RAMModule const &src);
+	RAMModule &operator=(RAMModule const & src);
+
 	int init();
 	int pump(IMonitorDisplay &display);
 };
@@ -73,6 +76,9 @@ class TimeModule : public IMonitorModule {
 public:
 	TimeModule();
 	~TimeModule();
+
+	TimeModule(TimeModule const &src);
+	TimeModule &operator=(TimeModule const & src);
 
 	int pump(IMonitorDisplay &display);
 };
