@@ -12,6 +12,7 @@
 
 #define ALLEGRO_NO_MAGIC_MAIN
 #include "DisplayModule/ImgUI.h"
+#include "DisplayModule/ncurses/Ncurses.hpp"
 #include "MonitorModule/Modules.h"
 
 #include <iostream>
@@ -32,15 +33,23 @@ int real_main(int argc, char **argv) {
 	NetworkModule Network = NetworkModule();
 	modules.push_back(&Network);
 
-	ImgUIMonitorDisplay display(modules);
 
-	(void)argc;
-	(void)argv;
-	if (display.init())
+	IMonitorDisplay *display;
+	ImgUIMonitorDisplay imgui = ImgUIMonitorDisplay(modules);
+	Ncurses ncurses = Ncurses(modules);
+
+	if (argc == 2 && strcmp(argv[1], "-g") == 0)
+		display = &imgui;
+	else if (argc >= 2)
+		return std::cerr << "Unknown option: " << argv[1] << std::endl, 1;
+	else
+		display = &ncurses;
+
+	if (display->init())
 		return 1;
-	if (display.show())
+	if (display->show())
 		return 1;
-	if (display.exit())
+	if (display->exit())
 		return 1;
 	return 0;
 }
