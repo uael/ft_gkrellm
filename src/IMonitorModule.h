@@ -32,7 +32,7 @@ public:
 	virtual int init() const;
 	virtual int exit() const;
 	virtual int pump(IMonitorDisplay &display);
-	std::string		getTopInfo();
+	std::string getTopInfo();
 	std::string getTopInfoByName();
 };
 

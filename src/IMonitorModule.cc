@@ -13,15 +13,17 @@
 #include "IMonitorModule.h"
 
 #include <stdexcept>
+#include <cstdio>
+#include <cerrno>
 
 IMonitorModule::IMonitorModule(const std::string name)
 	: _name(name) { }
 
-	IMonitorModule::~IMonitorModule() { }
+IMonitorModule::~IMonitorModule() { }
 
-	const std::string IMonitorModule::getName() const {
-		return _name;
-	}
+const std::string IMonitorModule::getName() const {
+	return _name;
+}
 
 int IMonitorModule::init() const
 {
@@ -38,7 +40,7 @@ int IMonitorModule::pump(IMonitorDisplay &display) {
 	throw std::logic_error("Function not yet implemented");
 }
 
-std::string		IMonitorModule::getTopInfo(void) 
+std::string		IMonitorModule::getTopInfo(void)
 {
 	int filedes[2];
 	char foo[4096];

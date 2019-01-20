@@ -17,16 +17,16 @@
 IMonitorDisplay::IMonitorDisplay(std::vector<IMonitorModule> const &modules)
 	: _modules(modules) { }
 
-	IMonitorDisplay::~IMonitorDisplay() { }
+IMonitorDisplay::~IMonitorDisplay() { }
 
-	int IMonitorDisplay::init() {
-		for (size_t i = 0; i < _modules.size(); i++) {
-			int const err = _modules[i].init();
-			if (err) return err;
-		}
-
-		return 0;
+int IMonitorDisplay::init() {
+	for (size_t i = 0; i < _modules.size(); i++) {
+		int const err = _modules[i].init();
+		if (err) return err;
 	}
+
+	return 0;
+}
 
 int IMonitorDisplay::exit() {
 	for (size_t i = 0; i < _modules.size(); i++) {
