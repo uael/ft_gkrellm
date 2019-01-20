@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cc                                            :+:      :+:    :+:   */
+/*   MonitorModule/CPU.cc                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alucas- <alucas-@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,37 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#define ALLEGRO_NO_MAGIC_MAIN
-#include "DisplayModule/ImgUI.h"
-#include "MonitorModule/Modules.h"
+#include "Modules.h"
+#include "IMonitorDisplay.h"
 
-#include <iostream>
+#include <unistd.h>
+#include <stdlib.h>
+#include <iomanip>
+#include <sstream>
 
-int real_main(int argc, char **argv) {
-	std::vector<IMonitorModule *> modules = std::vector<IMonitorModule *>();
+#include <sys/types.h>
+#include <sys/sysctl.h>
 
-	HostnameModule Hostname = HostnameModule();
-	modules.push_back(&Hostname);
-	OSInfoModule OSInfo = OSInfoModule();
-	modules.push_back(&OSInfo);
-	CPUModule CPU = CPUModule();
-	modules.push_back(&CPU);
-	RAMModule RAM = RAMModule();
-	modules.push_back(&RAM);
+OSInfoModule::OSInfoModule() : IMonitorModule("OS"), _uts() { }
 
-	ImgUIMonitorDisplay display(modules);
+OSInfoModule::~OSInfoModule() { }
 
-	(void)argc;
-	(void)argv;
-	if (display.init())
-		return 1;
-	if (display.show())
-		return 1;
-	if (display.exit())
-		return 1;
-	return 0;
+int OSInfoModule::init() {
+	return uname(&_uts);
 }
 
-int main(int argc, char **argv) {
-	return al_run_main(argc, argv, real_main);
+int OSInfoModule::pump(IMonitorDisplay &display) {
+	display.draw("%s", _uts.version);
+	return 0;
 }

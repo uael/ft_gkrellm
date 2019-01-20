@@ -16,6 +16,7 @@
 #include "IMonitorModule.h"
 
 #include <vector>
+#include <sys/utsname.h>
 
 class HostnameModule : public IMonitorModule {
 public:
@@ -34,6 +35,33 @@ public:
 	CPUModule();
 	~CPUModule();
 
+	int pump(IMonitorDisplay &display);
+};
+
+class OSInfoModule : public IMonitorModule {
+private:
+	struct utsname _uts;
+
+public:
+	OSInfoModule();
+	~OSInfoModule();
+
+	int init();
+	int pump(IMonitorDisplay &display);
+};
+
+class RAMModule : public IMonitorModule {
+private:
+	int64_t total_ram;
+	int64_t used_ram;
+	int64_t wired_ram;
+	int64_t free_ram;
+
+public:
+	RAMModule();
+	~RAMModule();
+
+	int init();
 	int pump(IMonitorDisplay &display);
 };
 
