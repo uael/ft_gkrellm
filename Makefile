@@ -6,7 +6,7 @@
 #    By: alucas- <alucas-@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 1970/01/01 00:00:42 by alucas-           #+#    #+#              #
-#    Updated: 1970/01/01 00:00:42 by alucas-          ###   ########.fr        #
+#    Updated: 2019/01/20 17:35:10 by alucas-          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,6 +112,7 @@ $(TARGET_BIN): | $(DEPS) $(MAKE_DEPS)
 	@echo "  LDX     $(notdir $@)"
 	$(V)$(LDX) $^ $(LDFLAGS) $(addprefix -L,$(LDDIRS)) \
 	  $(addprefix -l,$(LDLIBS)) -o $@
+	$(V)ln -sf $@ ./$(notdir $@)
 
 clean:
 	@rm -rf $(BUILD_DIR)
